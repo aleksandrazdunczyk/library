@@ -1,0 +1,109 @@
+//ParentSchool Class
+
+class School {
+  constructor(name, level, numberOfStudents){
+    this._name = name;
+    this._level = level;
+    this._numberOfStudents = numberOfStudents;
+  }
+  get name() {
+    return this._name;
+  }
+  get level() {
+    return this._level;
+  }
+  get numberOfStudents() {
+    return this._numberOfStudents;
+  }
+
+  set numberOfStudents(newNumberOfStudents) {
+    if (typeof newNumberOfStudents === number) {
+      this._numberOfStudents = newNumberOfStudents;
+    } else {
+      console.log('Invalid input: numberOfStudents must be set to a Number.')
+    }
+  }
+  quickFacts(){
+    console.log(`${this._name} educates ${this._numberOfStudents} students at the ${this._level} school level.`)
+  }
+
+  static pickSubstituteTeacher(substituteTeachers){
+    const randomIndex = Math.floor(substituteTeachers.length - 1 * Math.random());
+    return substituteTeachers[randomIndex];
+  }
+}
+
+// PrimarySchool Class
+
+class PrimarySchool extends School {
+  constructor(name, numberOfStudents, pickupPolicy) {
+    super(name, 'primary', numberOfStudents);
+    this._pickupPolicy = pickupPolicy;
+  }
+  get pickupPolicy() {
+    return this._pickupPolicy;
+  }
+}
+
+// HighSchool Class
+class HighSchool extends School {
+  constructor(name, numberOfStudents, sportsTeams) {
+    super(name, 'high', numberOfStudents);
+    this._sportsTeams = sportsTeams;
+  }
+  get sportsTeams() {
+    return this._sportsTeams;
+  }
+}
+//middle school class
+class Middle extends School {
+  constructor(name, numberOfStudents) {
+    super(name, 'middle', numberOfStudents);
+  }
+}
+//catalog
+class Catalog {
+    constructor(primaryList, middleList, highList){
+    this._primaryList = [];
+    this._middleList = [];
+    this._highList = [];
+   }
+  
+get primaryList() {
+     return this._primaryList;
+  }
+  
+set primaryList(newprimaryList)  {
+   this._primaryList.push(newprimaryList);
+   }
+   get middleList() {
+     return this._middleList;
+  }
+  
+set middleList(newmiddleList)  {
+   this._middleList.push(newmiddleList);
+   }
+
+   get middleList() {
+     return this._middleList;
+  }
+  
+set highList(newhighList)  {
+   this._highList.push(newhighList);
+   }
+}
+
+//Instances of PrimarySchool and HighSchool
+
+const lorraineHansbury = new PrimarySchool('Lorraine Hansbury', 514,'Students must be picked up by a parent, guardian, or a family member over the age of 13.')
+console.log(lorraineHansbury.quickFacts())
+
+console.log(School.pickSubstituteTeacher(['Jamal Crawford', 'Lou Williams', 'J. R. Smith', 'James Harden', 'Jason Terry', 'Manu Ginobli']))
+
+const alSmith = new HighSchool('Al E. Smith',415, ['Baseball', 'Basketball', 'Volleyball', 'Track and Field']);
+
+console.log(alSmith.quickFacts())
+
+const newMediaCatolog = new Catalog();
+newMediaCatolog.primaryList = lorraineHansbury;
+console.log(newMediaCatolog)
